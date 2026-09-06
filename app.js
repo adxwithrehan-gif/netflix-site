@@ -21,12 +21,17 @@ const searchInput = document.getElementById("search");
 
 async function fetchAllMovies() {
     try {
-        const trendingRes = await fetch(`${BASE_URL}/trending/movie/day?api_key=${API_KEY}`);
-        const trendingData = await trendingRes.json();
-        displayMovies(trendingData.results, trendingRow);
+        // 1. Latest & Now Playing Movies (Date ke hisab se sabse nayi movies jo release hui hain)
+        const latestRes = await fetch(`${BASE_URL}/movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`);
+        const latestData = await latestRes.json();
         
-        if(trendingData.results.length > 0) {
-            const featured = trendingData.results[0];
+        // Results ko release date ke mutabiq sort karna (Latest release date sabse upar)
+        const sortedMovies = latestData.results.sort((a, b) => new Date(b.release_date) - new Date(a.release_date));
+        
+        displayMovies(sortedMovies, trendingRow);
+        
+        if(sortedMovies.length > 0) {
+            const featured = sortedMovies[0]; // Sabse nayi movie hero banner par show hogi
             hero.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${featured.backdrop_path})`;
             heroTitle.innerText = featured.title || featured.name;
             heroOverview.innerText = featured.overview;
@@ -39,15 +44,18 @@ async function fetchAllMovies() {
             };
         }
 
-        const actionRes = await fetch(`${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=28`);
+        // 2. Action Movies
+        const actionRes = await fetch(`${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=28&sort_by=release_date.desc`);
         const actionData = await actionRes.json();
         displayMovies(actionData.results, actionRow);
 
-        const horrorRes = await fetch(`${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=27`);
+        // 3. Horror Movies
+        const horrorRes = await fetch(`${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=27&sort_by=release_date.desc`);
         const horrorData = await horrorRes.json();
         displayMovies(horrorData.results, horrorRow);
 
-        const comedyRes = await fetch(`${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=35`);
+        // 4. Comedy Movies
+        const comedyRes = await fetch(`${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=35&sort_by=release_date.desc`);
         const comedyData = await comedyRes.json();
         displayMovies(comedyData.results, comedyRow);
 
