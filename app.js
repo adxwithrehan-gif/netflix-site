@@ -2,6 +2,10 @@ const API_KEY = "e0454b55527f15c2784604a0bc84df14";
 const BASE_URL = "https://api.themoviedb.org/3";
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
 
+// Bunny.net Configuration
+const BUNNY_LIBRARY_ID = "YOUR_LIBRARY_ID"; // Yahan apni Bunny Library ID likhein (misal ke tor par: 123456)
+const BUNNY_API_KEY = "9e332970-1dc5-44f6-89ff-8a9de190696cb138784f-41f7-46ec-af5a-0bee756cdf89";
+
 const trendingRow = document.getElementById("trending-row");
 const actionRow = document.getElementById("action-row");
 const horrorRow = document.getElementById("horror-row");
@@ -15,7 +19,7 @@ const heroWatchBtn = document.getElementById("hero-watch-btn");
 const modal = document.getElementById("modal");
 const modalTitle = document.getElementById("modal-title");
 const modalOverview = document.getElementById("modal-overview");
-const modalVideo = document.getElementById("modal-video");
+const modalVideo = document.getElementById("modal-video"); // Ensure this is an <iframe> element in your HTML
 const closeModal = document.querySelector(".close");
 const searchInput = document.getElementById("search");
 
@@ -36,8 +40,10 @@ async function fetchAllMovies() {
             heroWatchBtn.onclick = () => {
                 modalTitle.innerText = featured.title || featured.name;
                 modalOverview.innerText = featured.overview;
-                // Using AutoEmbed player
-                modalVideo.src = `https://player.autoembed.cc/embed/movie/${featured.id}`;
+                
+                // Bunny Stream Iframe Link (Aap yahan apni uploaded video ka Bunny GUID ya ID lagayenge)
+                // Example format: https://iframe.mediadelivery.net/embed/LIBRARY_ID/VIDEO_GUID
+                modalVideo.src = `https://iframe.mediadelivery.net/embed/${BUNNY_LIBRARY_ID}/YOUR_BUNNY_VIDEO_GUID`;
                 modal.style.display = "flex";
             };
         }
@@ -55,7 +61,7 @@ async function fetchAllMovies() {
         displayMovies(comedyData.results, comedyRow);
 
     } catch (error) {
-        console.error("Error fetching data:", error);
+        console.log("Error fetching data:", error);
     }
 }
 
@@ -70,8 +76,9 @@ function displayMovies(movies, element) {
         card.addEventListener("click", () => {
             modalTitle.innerText = movie.title || movie.name;
             modalOverview.innerText = movie.overview;
-            // Using AutoEmbed player
-            modalVideo.src = `https://player.autoembed.cc/embed/movie/${movie.id}`;
+            
+            // Bunny Stream Player Link for movie click
+            modalVideo.src = `https://iframe.mediadelivery.net/embed/${BUNNY_LIBRARY_ID}/YOUR_BUNNY_VIDEO_GUID`;
             modal.style.display = "flex";
         });
         element.appendChild(card);
