@@ -21,17 +21,15 @@ const searchInput = document.getElementById("search");
 
 async function fetchAllMovies() {
     try {
-        // 1. Latest & Now Playing Movies (Date ke hisab se sabse nayi movies jo release hui hain)
+        // Latest / Now Playing Movies
         const latestRes = await fetch(`${BASE_URL}/movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`);
         const latestData = await latestRes.json();
-        
-        // Results ko release date ke mutabiq sort karna (Latest release date sabse upar)
         const sortedMovies = latestData.results.sort((a, b) => new Date(b.release_date) - new Date(a.release_date));
         
         displayMovies(sortedMovies, trendingRow);
         
         if(sortedMovies.length > 0) {
-            const featured = sortedMovies[0]; // Sabse nayi movie hero banner par show hogi
+            const featured = sortedMovies[0];
             hero.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${featured.backdrop_path})`;
             heroTitle.innerText = featured.title || featured.name;
             heroOverview.innerText = featured.overview;
@@ -39,22 +37,23 @@ async function fetchAllMovies() {
             heroWatchBtn.onclick = () => {
                 modalTitle.innerText = featured.title || featured.name;
                 modalOverview.innerText = featured.overview;
-                modalVideo.src = `https://vidsrc.to/embed/movie?tmdb=${featured.id}`;
+                // Fixed embed URL format for direct movie playback
+                modalVideo.src = `https://vidsrc.pro/embed/movie/${featured.id}`;
                 modal.style.display = "flex";
             };
         }
 
-        // 2. Action Movies
+        // Action Movies
         const actionRes = await fetch(`${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=28&sort_by=release_date.desc`);
         const actionData = await actionRes.json();
         displayMovies(actionData.results, actionRow);
 
-        // 3. Horror Movies
+        // Horror Movies
         const horrorRes = await fetch(`${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=27&sort_by=release_date.desc`);
         const horrorData = await horrorRes.json();
         displayMovies(horrorData.results, horrorRow);
 
-        // 4. Comedy Movies
+        // Comedy Movies
         const comedyRes = await fetch(`${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=35&sort_by=release_date.desc`);
         const comedyData = await comedyRes.json();
         displayMovies(comedyData.results, comedyRow);
@@ -75,7 +74,8 @@ function displayMovies(movies, element) {
         card.addEventListener("click", () => {
             modalTitle.innerText = movie.title || movie.name;
             modalOverview.innerText = movie.overview;
-            modalVideo.src = `https://vidsrc.to/embed/movie?tmdb=${movie.id}`;
+            // Fixed embed URL format using vidsrc.pro for direct movie streaming
+            modalVideo.src = `https://vidsrc.pro/embed/movie/${movie.id}`;
             modal.style.display = "flex";
         });
         element.appendChild(card);
