@@ -3,52 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StreamFlix - Netflix Style Movie Hub</title>
+    <title>Movie Streaming Website</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <header class="navbar">
-        <div class="logo">STREAMFLIX</div>
-        <input type="text" id="search" placeholder="Movies search karein...">
+        <div class="logo">MovieFlix</div>
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Search movies...">
+        </div>
     </header>
 
-    <div id="hero" class="hero">
+    <section id="hero" class="hero">
         <div class="hero-content">
-            <h1 id="hero-title">Loading...</h1>
-            <p id="hero-overview"></p>
-            <div class="hero-buttons">
-                <button id="hero-watch-btn" class="btn play-btn">▶ Watch Movie</button>
-            </div>
+            <h1 id="hero-title">Movie Title</h1>
+            <p id="hero-overview">Movie overview goes here...</p>
+            <button id="hero-watch-btn" class="watch-btn">Play Now</button>
         </div>
-    </div>
+    </section>
 
-    <main class="content">
-        <section>
-            <h2>🔥 Trending Now (Auto-Updated)</h2>
-            <div class="row" id="trending-row"></div>
+    <main class="content-container">
+        <section class="row-section">
+            <h2>Trending Now</h2>
+            <div class="movie-row" id="trending-row"></div>
         </section>
-        <section>
-            <h2>💥 Action Movies</h2>
-            <div class="row" id="action-row"></div>
+
+        <section class="row-section">
+            <h2>Action Movies</h2>
+            <div class="movie-row" id="action-row"></div>
         </section>
-        <section>
-            <h2>😱 Horror Movies</h2>
-            <div class="row" id="horror-row"></div>
+
+        <section class="row-section">
+            <h2>Horror Movies</h2>
+            <div class="movie-row" id="horror-row"></div>
         </section>
-        <section>
-            <h2>😂 Comedy Movies</h2>
-            <div class="row" id="comedy-row"></div>
+
+        <section class="row-section">
+            <h2>Comedy Movies</h2>
+            <div class="movie-row" id="comedy-row"></div>
         </section>
     </main>
 
-    <!-- Modal Popup with Full Movie Embed Player -->
     <div id="modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <div id="video-container" class="video-container">
-                <!-- Advanced Embed Player with Multi-Language Support -->
-                <iframe id="modal-video" src="" frameborder="0" allowfullscreen></iframe>
-            </div>
+            <iframe id="modal-video" src="" frameborder="0" allowfullscreen></iframe>
             <h2 id="modal-title"></h2>
             <p id="modal-overview"></p>
         </div>
