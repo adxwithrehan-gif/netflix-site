@@ -37,8 +37,8 @@ async function fetchAllMovies() {
             heroWatchBtn.onclick = () => {
                 modalTitle.innerText = featured.title || featured.name;
                 modalOverview.innerText = featured.overview;
-                // Fixed embed URL format for direct movie playback
-                modalVideo.src = `https://vidsrc.pro/embed/movie/${featured.id}`;
+                // Updated working embed player link
+                modalVideo.src = `https://vidsrc.cc/v2/embed/movie/${featured.id}`;
                 modal.style.display = "flex";
             };
         }
@@ -74,8 +74,8 @@ function displayMovies(movies, element) {
         card.addEventListener("click", () => {
             modalTitle.innerText = movie.title || movie.name;
             modalOverview.innerText = movie.overview;
-            // Fixed embed URL format using vidsrc.pro for direct movie streaming
-            modalVideo.src = `https://vidsrc.pro/embed/movie/${movie.id}`;
+            // Updated working embed player link using vidsrc.cc
+            modalVideo.src = `https://vidsrc.cc/v2/embed/movie/${movie.id}`;
             modal.style.display = "flex";
         });
         element.appendChild(card);
