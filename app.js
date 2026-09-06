@@ -34,8 +34,7 @@ async function fetchAllMovies() {
             heroWatchBtn.onclick = () => {
                 modalTitle.innerText = featured.title || featured.name;
                 modalOverview.innerText = featured.overview;
-                // Vidsrc embed link using TMDB ID
-                modalVideo.src = `https://vidsrc.xyz/embed/movie?tmdb=${featured.id}`;
+                modalVideo.src = `https://vidsrc.to/embed/movie?tmdb=${featured.id}`;
                 modal.style.display = "flex";
             };
         }
@@ -68,8 +67,7 @@ function displayMovies(movies, element) {
         card.addEventListener("click", () => {
             modalTitle.innerText = movie.title || movie.name;
             modalOverview.innerText = movie.overview;
-            // Vidsrc embed link jo automatically movie ki TMDB ID utha kar full movie play karega
-            modalVideo.src = `https://vidsrc.xyz/embed/movie?tmdb=${movie.id}`;
+            modalVideo.src = `https://vidsrc.to/embed/movie?tmdb=${movie.id}`;
             modal.style.display = "flex";
         });
         element.appendChild(card);
@@ -78,13 +76,13 @@ function displayMovies(movies, element) {
 
 closeModal.addEventListener("click", () => {
     modal.style.display = "none";
-    modalVideo.src = ""; // Stop video when modal closes
+    modalVideo.src = "";
 });
 
 window.addEventListener("click", (e) => { 
     if(e.target === modal) {
         modal.style.display = "none";
-        modalVideo.src = ""; // Stop video when modal closes
+        modalVideo.src = "";
     }
 });
 
