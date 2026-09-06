@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreamFlix - Movie Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">STREAMFLIX</div>
+        <input type="text" id="search" placeholder="Movies search karein...">
+    </header>
+
+    <div id="hero" class="hero">
+        <div class="hero-content">
+            <h1 id="hero-title">Loading...</h1>
+            <p id="hero-overview"></p>
+        </div>
+    </div>
+
+    <main class="content">
+        <section>
+            <h2>Trending Now</h2>
+            <div class="row" id="trending-row"></div>
+        </section>
+        <section>
+            <h2>Top Rated</h2>
+            <div class="row" id="top-rated-row"></div>
+        </section>
+    </main>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-title"></h2>
+            <p id="modal-overview"></p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
