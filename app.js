@@ -21,7 +21,6 @@ const searchInput = document.getElementById("search");
 
 async function fetchAllMovies() {
     try {
-        // Latest / Now Playing Movies sorted by release date
         const latestRes = await fetch(`${BASE_URL}/movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`);
         const latestData = await latestRes.json();
         const sortedMovies = latestData.results.sort((a, b) => new Date(b.release_date) - new Date(a.release_date));
@@ -37,22 +36,20 @@ async function fetchAllMovies() {
             heroWatchBtn.onclick = () => {
                 modalTitle.innerText = featured.title || featured.name;
                 modalOverview.innerText = featured.overview;
-                modalVideo.src = `https://multiembed.mov/?video_id=${featured.id}&tmdb=1`;
+                // Using AutoEmbed player
+                modalVideo.src = `https://player.autoembed.cc/embed/movie/${featured.id}`;
                 modal.style.display = "flex";
             };
         }
 
-        // Action Movies
         const actionRes = await fetch(`${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=28&sort_by=release_date.desc`);
         const actionData = await actionRes.json();
         displayMovies(actionData.results, actionRow);
 
-        // Horror Movies
         const horrorRes = await fetch(`${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=27&sort_by=release_date.desc`);
         const horrorData = await horrorRes.json();
         displayMovies(horrorData.results, horrorRow);
 
-        // Comedy Movies
         const comedyRes = await fetch(`${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=35&sort_by=release_date.desc`);
         const comedyData = await comedyRes.json();
         displayMovies(comedyData.results, comedyRow);
@@ -73,7 +70,8 @@ function displayMovies(movies, element) {
         card.addEventListener("click", () => {
             modalTitle.innerText = movie.title || movie.name;
             modalOverview.innerText = movie.overview;
-            modalVideo.src = `https://multiembed.mov/?video_id=${movie.id}&tmdb=1`;
+            // Using AutoEmbed player
+            modalVideo.src = `https://player.autoembed.cc/embed/movie/${movie.id}`;
             modal.style.display = "flex";
         });
         element.appendChild(card);
