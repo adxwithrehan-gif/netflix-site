@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StreamFlix - Movie Hub</title>
+    <title>StreamFlix - Netflix Style Movie Hub</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -16,25 +16,42 @@
         <div class="hero-content">
             <h1 id="hero-title">Loading...</h1>
             <p id="hero-overview"></p>
+            <div class="hero-buttons">
+                <button id="hero-watch-btn" class="btn play-btn">▶ Watch Now</button>
+                <button id="hero-download-btn" class="btn download-btn">⬇ Download</button>
+            </div>
         </div>
     </div>
 
     <main class="content">
         <section>
-            <h2>Trending Now</h2>
+            <h2>🔥 Trending Now (Auto-Updated)</h2>
             <div class="row" id="trending-row"></div>
         </section>
         <section>
-            <h2>Top Rated</h2>
-            <div class="row" id="top-rated-row"></div>
+            <h2>💥 Action Movies</h2>
+            <div class="row" id="action-row"></div>
+        </section>
+        <section>
+            <h2>😱 Horror Movies</h2>
+            <div class="row" id="horror-row"></div>
+        </section>
+        <section>
+            <h2>😂 Comedy Movies</h2>
+            <div class="row" id="comedy-row"></div>
         </section>
     </main>
 
+    <!-- Modal Popup for Movie Details -->
     <div id="modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2 id="modal-title"></h2>
             <p id="modal-overview"></p>
+            <div class="modal-buttons">
+                <a id="modal-watch" href="#" target="_blank" class="btn play-btn">▶ Watch Now</a>
+                <a id="modal-download" href="#" target="_blank" class="btn download-btn">⬇ Download</a>
+            </div>
         </div>
     </div>
 
