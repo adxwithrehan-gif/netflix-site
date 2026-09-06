@@ -21,7 +21,7 @@ const searchInput = document.getElementById("search");
 
 async function fetchAllMovies() {
     try {
-        // Latest / Now Playing Movies
+        // Latest / Now Playing Movies sorted by release date
         const latestRes = await fetch(`${BASE_URL}/movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`);
         const latestData = await latestRes.json();
         const sortedMovies = latestData.results.sort((a, b) => new Date(b.release_date) - new Date(a.release_date));
@@ -37,8 +37,7 @@ async function fetchAllMovies() {
             heroWatchBtn.onclick = () => {
                 modalTitle.innerText = featured.title || featured.name;
                 modalOverview.innerText = featured.overview;
-                // Using Multembed reliable player
-                modalVideo.src = `https://multembed.mov/?video_id=${featured.id}&tmdb=1`;
+                modalVideo.src = `https://multiembed.mov/?video_id=${featured.id}&tmdb=1`;
                 modal.style.display = "flex";
             };
         }
@@ -74,8 +73,7 @@ function displayMovies(movies, element) {
         card.addEventListener("click", () => {
             modalTitle.innerText = movie.title || movie.name;
             modalOverview.innerText = movie.overview;
-            // Using Multembed reliable player
-            modalVideo.src = `https://multembed.mov/?video_id=${movie.id}&tmdb=1`;
+            modalVideo.src = `https://multiembed.mov/?video_id=${movie.id}&tmdb=1`;
             modal.style.display = "flex";
         });
         element.appendChild(card);
