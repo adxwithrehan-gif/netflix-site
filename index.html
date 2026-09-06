@@ -17,8 +17,7 @@
             <h1 id="hero-title">Loading...</h1>
             <p id="hero-overview"></p>
             <div class="hero-buttons">
-                <button id="hero-watch-btn" class="btn play-btn">▶ Watch Now</button>
-                <button id="hero-download-btn" class="btn download-btn">⬇ Download</button>
+                <button id="hero-watch-btn" class="btn play-btn">▶ Watch Movie</button>
             </div>
         </div>
     </div>
@@ -42,16 +41,16 @@
         </section>
     </main>
 
-    <!-- Modal Popup for Movie Details -->
+    <!-- Modal Popup with Full Movie Embed Player -->
     <div id="modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
+            <div id="video-container" class="video-container">
+                <!-- Advanced Embed Player with Multi-Language Support -->
+                <iframe id="modal-video" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
             <h2 id="modal-title"></h2>
             <p id="modal-overview"></p>
-            <div class="modal-buttons">
-                <a id="modal-watch" href="#" target="_blank" class="btn play-btn">▶ Watch Now</a>
-                <a id="modal-download" href="#" target="_blank" class="btn download-btn">⬇ Download</a>
-            </div>
         </div>
     </div>
 
